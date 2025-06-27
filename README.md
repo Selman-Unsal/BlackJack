@@ -1,6 +1,5 @@
-###################################################################
+
 This BlackJack game was made by Selman Unsal
-###################################################################
 
 The game is BlackJack, if you know the rules, you can play it
 
