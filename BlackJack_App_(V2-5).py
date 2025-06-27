@@ -10,8 +10,7 @@ from colorama import Fore, Back, Style
 ##################################################################
 #This clears the screen quickly
 def clearScreen():
-    for i in range(20):
-        print("\n\n\n")
+    print("\033c")
     
 #This creates a repeating ♥♦♠♣ line
 def fancyLine(cards2):
@@ -324,5 +323,6 @@ def Start(reply):
 urCards = []
 DlrCards = []
 
+print("\033c")
 print(fancyLine(cards2))
 Start(input("\n\t\t Are you ready to play??\n\n\t\t   (Enter any key)\n\t\t\t  "))
