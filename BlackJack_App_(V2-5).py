@@ -2,16 +2,13 @@
 import random
 import time
 import copy
-import colorama
-from colorama import Fore, Back, Style
 
 ##################################################################
 # THIS BOX CONTAINS PROGRAM TOOLS, NOT ANYTHING FOR THE GAME ITSELF
 ##################################################################
-#This clears the screen quickly
-def clearScreen():
-    print("\033c")
-    
+
+# print("\033c") -> This clears the screen
+
 #This creates a repeating ♥♦♠♣ line
 def fancyLine(cards2):
     tempLine = ''
@@ -45,7 +42,7 @@ random.shuffle(gameCards)
 
 #Display for the screen, probably one of the most important methods
 def showCards(urCards, DlrCards):
-    clearScreen()
+    print("\033c")
     print("\t\tDealer cards: \n")
     print("\t\t   ", end = '')
     tempDlrCards = copy.deepcopy(DlrCards)
@@ -56,7 +53,6 @@ def showCards(urCards, DlrCards):
     for i in range(len(tempDlrCards)):
         print(tempDlrCards[i], end = ' ')
     
-
     if tempDlrCards[1] != "🂠":
         print("\n\n\t\tDealer = " + str(cardScore(DlrCards)))
     else:
@@ -75,10 +71,10 @@ def hittingYou(urCards, DlrCards):
     choice = input("\n\t\tHit? (y/n)\n\n\t\t     ")
     if (choice == 'Y' or choice == 'y') and cardScore(urCards) < 21:
         while cardScore(urCards) < 21 and (choice == 'Y' or choice == 'y'):
-            clearScreen()
+            print("\033c")
             print("\n\t   You chose to hit on a " + str(cardScore(urCards)) + "\n")
             dealUrCards(urCards)
-            time.sleep(1)
+            time.sleep(2)
             showCards(urCards, DlrCards)
             if cardScore(urCards) < 21:
                 choice = input("\n\n\t\tHit? (y/n)\n\t\t\t")
@@ -91,14 +87,14 @@ def hittingYou(urCards, DlrCards):
             else:
                 continue
     elif choice == 'N' or choice == 'n':
-        clearScreen()
+        print("\033c")
         print("\n\t   You chose to stand on a " + str(cardScore(urCards)) + "\n")
-        time.sleep(1)
+        time.sleep(2)
         showCards(urCards, DlrCards)
         time.sleep(2)
         hittingDlr(DlrCards)
     else:
-        clearScreen()
+        print("\033c")
         print("\n\t  Please enter a valid response...\n")
         time.sleep(1)
         showCards(urCards, DlrCards)
@@ -192,7 +188,7 @@ def cardScore(cards):
 
 #Instant win message
 def instaWin():
-    clearScreen()
+    print("\033c")
     print(fancyLine(cards2))
     print("\n\t\tYOU INSTANTLY WIN WITH BLACKJACK!!\n")
     time.sleep(2)
@@ -200,11 +196,11 @@ def instaWin():
     time.sleep(2)
     showCards(urCards, DlrCards)
     print("\n" + fancyLine(cards2))
-    quit()
+    return
 
 #Bust message
 def bust_lose():
-    clearScreen()
+    print("\033c")
     print(fancyLine(cards2))
     print("\n\t\tBUST! You lost buddy...\n")
     time.sleep(2)
@@ -212,11 +208,11 @@ def bust_lose():
     time.sleep(2)
     showCards(urCards, DlrCards)
     print("\n" + fancyLine(cards2))
-    quit()
+    return
 
 #Game Tied Message
 def tieGame():
-    clearScreen()
+    print("\033c")
     print(fancyLine(cards2))
     print("\n\t\tTIED?!? Holy Moly...\n")
     time.sleep(2)
@@ -224,11 +220,11 @@ def tieGame():
     time.sleep(2)
     showCards(urCards, DlrCards)
     print("\n" + fancyLine(cards2))
-    quit()
+    return
 
 #Game Lost by score Message
 def loseGame():
-    clearScreen()
+    print("\033c")
     print(fancyLine(cards2))
     print("\n\t\tYou Lose by Score :((\n")
     time.sleep(2)
@@ -236,11 +232,11 @@ def loseGame():
     time.sleep(2)
     showCards(urCards, DlrCards)
     print("\n" + fancyLine(cards2))
-    quit()
+    return
 
 #Game Won by score message
 def winGame():
-    clearScreen()
+    print("\033c")
     print(fancyLine(cards2))
     print("\n\t\tYou Win by Score :D\n")
     time.sleep(2)
@@ -248,11 +244,11 @@ def winGame():
     time.sleep(2)
     showCards(urCards, DlrCards)
     print("\n" + fancyLine(cards2))
-    quit()
+    return
 
 #Game Won because Dealer Struck out
 def winGame2():
-    clearScreen()
+    print("\033c")
     print(fancyLine(cards2))
     print("\n\t\tYou Win, Dealer Bust :D\n")
     time.sleep(2)
@@ -260,7 +256,7 @@ def winGame2():
     time.sleep(2)
     showCards(urCards, DlrCards)
     print("\n" + fancyLine(cards2))
-    quit()
+    return
 
 
 
@@ -326,3 +322,18 @@ DlrCards = []
 print("\033c")
 print(fancyLine(cards2))
 Start(input("\n\t\t Are you ready to play??\n\n\t\t   (Enter any key)\n\t\t\t  "))
+
+#Replay the game
+response = 'Y'
+while response == 'y' or response == "Y":
+    #Reset all the cards
+    urCards = []
+    DlrCards = []
+    gameCards = copy.deepcopy(allCards)
+    #Reshuffle just to make it extra random
+    random.seed()
+    random.shuffle(gameCards)
+    response = input("\n\t\tPlay Again? (y/n)\n\t\t\t")
+    if response == ('y' or 'Y'):
+        Start(response)
+print("\n\n\t\tGood game!\n\n")
