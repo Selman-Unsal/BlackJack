@@ -5,9 +5,9 @@ import copy
 import colorama
 from colorama import Fore, Back, Style
 
-################################################################  
+##################################################################
 # THIS BOX CONTAINS PROGRAM TOOLS, NOT ANYTHING FOR THE GAME ITSELF
-################################################################
+##################################################################
 #This clears the screen quickly
 def clearScreen():
     for i in range(20):
