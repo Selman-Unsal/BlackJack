@@ -269,9 +269,7 @@ def winGame2():
 def Start(reply):
     print("\n\n\t   Welcome to BlackJack! ᵇʸ ˢᵉˡᵐᵃⁿ")
     time.sleep(2)
-    print("\n\t   I am 6.5 hours into making this...")
-    time.sleep(0.5)
-    
+
     #Burn one card like in the game
     gameCards.pop()
     
